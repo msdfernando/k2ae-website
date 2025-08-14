@@ -51,4 +51,17 @@ document.addEventListener('DOMContentLoaded', function() {
     card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(card);
   });
+  
+  // Handle lazy-loaded images
+  document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+    if (img.complete && img.naturalHeight !== 0) {
+      // Image is already loaded
+      img.classList.add('loaded');
+    } else {
+      // Wait for image to load
+      img.addEventListener('load', function() {
+        this.classList.add('loaded');
+      });
+    }
+  });
 });
